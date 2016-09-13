@@ -7,8 +7,8 @@ package edu.ncsu.csc216.wolf_scheduler.course;
  *			Course and Event classes.  
  */
 
-public abstract class Activity {
-
+public abstract class Activity implements Conflict {
+	
 	/** Course's title. */
 	private String title;
 	/** Course's meeting days */
@@ -231,6 +231,15 @@ public abstract class Activity {
 	 * @return if the activity is a duplicate or not
 	 */
 	public abstract boolean isDuplicate(Activity activity);
+
+	/* (non-Javadoc)
+	 * @see edu.ncsu.csc216.wolf_scheduler.course.Conflict#checkConflict(edu.ncsu.csc216.wolf_scheduler.course.Activity)
+	 */
+	@Override
+	public void checkConflict(Activity possibleConflictingActivity) throws ConflictException {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }
