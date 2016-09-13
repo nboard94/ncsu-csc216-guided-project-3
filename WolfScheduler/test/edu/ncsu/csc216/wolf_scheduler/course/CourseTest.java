@@ -692,5 +692,18 @@ public class CourseTest {
 		String s2 = "CSC216,Programming Concepts - Java,001,4,sesmith5,A";
 		assertEquals(s2, c2.toString());
 	}
+	
+	@Test
+	public void testShortArray() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
+		assertEquals(c.getShortDisplayArray().length, 4);
+	}
+	
+	@Test
+	public void testLongArray() {
+		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
+		assertEquals(c.getLongDisplayArray().length, 7);
+		
+	}
 
 }
