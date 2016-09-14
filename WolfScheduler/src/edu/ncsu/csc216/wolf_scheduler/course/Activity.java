@@ -258,7 +258,7 @@ public abstract class Activity implements Conflict {
 		}
 		
 		//Determines if the two ArrayLists share any common elements
-		char[] possibleDays = {'M','T','W','H','F','S','U'};
+		char[] possibleDays = {'M', 'T', 'W', 'H', 'F', 'S', 'U'};
 		char currentDay = ' ';
 		boolean daysInCommon = false;
 		
