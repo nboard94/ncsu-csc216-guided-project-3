@@ -197,8 +197,19 @@ public class WolfSchedulerTest {
 			ws.addEvent("Not Exercise", "WF", 1300, 1400, 4, "Strogboy");
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals(e.getMessage(), "The course cannot be added due to a conflict.");
+			assertEquals(e.getMessage(), "The event cannot be added due to a conflict.");
 		}
+		
+		try {
+			ws.addEvent("exercise", "MTWHF", 1200, 1300, 4, "");
+			ws.addCourse("CSC215", "002");
+			ws.addCourse("CSC226", "001");
+			ws.addCourse("CSC230", "001");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "The event cannot be added due to a conflict.");
+		}
+		
 	}
 
 	/**

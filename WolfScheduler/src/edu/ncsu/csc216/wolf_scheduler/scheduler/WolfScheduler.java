@@ -71,6 +71,7 @@ public class WolfScheduler {
 		Activity currentCourse;
 		Course courseToAdd = new Course (name, "title", section, 3, "id", "MWF");
 
+		//redundant
 		for (int i = 0; i < catalog.size(); i++) {
 			currentCourse = catalog.get(i);
 			if (currentCourse instanceof Course && ((Course) currentCourse).getName().equals(name) && ((Course)currentCourse).getSection().equals(section)) {
@@ -139,7 +140,7 @@ public boolean addEvent(String eventTitle, String eventMeetingDays, int eventSta
 			try {
 				schedule.get(i).checkConflict(eventToAdd);
 			} catch (ConflictException e) {
-				throw new IllegalArgumentException("The course cannot be added due to a conflict.");
+				throw new IllegalArgumentException("The event cannot be added due to a conflict.");
 			}
 		}
 

@@ -32,6 +32,7 @@ public class ActivityTest {
 		    assertEquals("TH 2:45PM-3:30PM", a1.getMeetingString());
 		    assertEquals("TH 1:30PM-2:45PM", a2.getMeetingString());
 		}
+		
 	}
 
 }
