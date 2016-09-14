@@ -64,7 +64,6 @@ public class WolfScheduler {
 	 * @param section section of the course to add
 	 * @throws IllegalArgumentException if that course is already in the schedule
 	 * @return false if the course can't be added
-	 * @throws IllegalArgumentException
 	 */
 	public boolean addCourse(String name, String section) throws IllegalArgumentException {
 		
@@ -122,7 +121,6 @@ public class WolfScheduler {
  * @param eventDetails extra details about the event
  * @throws IllegalArgumentException if event is a duplicate
  * @return false if event can't be added
- * @throws ConflictException 
  */
 public boolean addEvent(String eventTitle, String eventMeetingDays, int eventStartTime, int eventEndTime,
 			int eventWeeklyRepeat, String eventDetails) throws IllegalArgumentException {
