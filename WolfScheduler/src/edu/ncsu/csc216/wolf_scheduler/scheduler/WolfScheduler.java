@@ -91,7 +91,7 @@ public class WolfScheduler {
 				try {
 					schedule.get(i).checkConflict(courseToAdd);
 				} catch (ConflictException e) {
-					throw new IllegalArgumentException(e.getMessage());
+					throw new IllegalArgumentException("The course cannot be added due to a conflict.");
 				}
 				
 			}
@@ -139,7 +139,7 @@ public boolean addEvent(String eventTitle, String eventMeetingDays, int eventSta
 			try {
 				schedule.get(i).checkConflict(eventToAdd);
 			} catch (ConflictException e) {
-				throw new IllegalArgumentException(e.getMessage());
+				throw new IllegalArgumentException("The course cannot be added due to a conflict.");
 			}
 		}
 

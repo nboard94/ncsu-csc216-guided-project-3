@@ -155,7 +155,7 @@ public class WolfSchedulerTest {
 			ws.addCourse("CSC226", "001");
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals("Schedule conflict.", e.getMessage());
+			assertEquals("The course cannot be added due to a conflict.", e.getMessage());
 		}
 	}
 	
@@ -203,7 +203,7 @@ public class WolfSchedulerTest {
 	
 			fail();
 		} catch (IllegalArgumentException e) {
-			assertEquals("Schedule conflict.", e.getMessage());
+			assertEquals("The course cannot be added due to a conflict.", e.getMessage());
 		}
 	}
 
