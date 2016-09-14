@@ -202,7 +202,7 @@ public class WolfSchedulerTest {
 			System.out.println(ws.schedule.get(1));
 	
 			fail();
-		} catch (ConflictException e) {
+		} catch (IllegalArgumentException e) {
 			assertEquals("Schedule conflict.", e.getMessage());
 		}
 	}

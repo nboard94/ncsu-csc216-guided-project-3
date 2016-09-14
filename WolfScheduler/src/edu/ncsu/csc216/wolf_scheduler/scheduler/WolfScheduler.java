@@ -122,7 +122,7 @@ public class WolfScheduler {
  * @throws ConflictException 
  */
 public boolean addEvent(String eventTitle, String eventMeetingDays, int eventStartTime, int eventEndTime,
-			int eventWeeklyRepeat, String eventDetails) throws IllegalArgumentException {
+			int eventWeeklyRepeat, String eventDetails) throws IllegalArgumentException, ConflictException {
 		
 		Event eventToAdd = new Event(eventTitle, eventMeetingDays, eventStartTime, eventEndTime, eventWeeklyRepeat, eventDetails);
 		
