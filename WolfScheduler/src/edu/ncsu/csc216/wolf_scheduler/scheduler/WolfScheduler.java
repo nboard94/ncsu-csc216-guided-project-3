@@ -89,12 +89,14 @@ public class WolfScheduler {
 				if (currentCourse.isDuplicate(courseToAdd)) {
 					throw new IllegalArgumentException("You are already enrolled in " + name);
 				}
-				try {
-					schedule.get(i).checkConflict(courseToAdd);
-				} catch (ConflictException e) {
-					throw new IllegalArgumentException("The course cannot be added due to a conflict.");
-				}
+
 				
+			}
+			
+			try {
+				schedule.get(i).checkConflict(courseToAdd);
+			} catch (ConflictException e) {
+				throw new IllegalArgumentException("The course cannot be added due to a conflict.");
 			}
 		}
 		
