@@ -149,6 +149,8 @@ public boolean addEvent(String eventTitle, String eventMeetingDays, int eventSta
 	}
 
 
+
+
 	/**Removes a course from a schedule
 	 * @param idx index of activity to remove in the schedule
 	 * @return true If event can be removed

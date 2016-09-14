@@ -1,5 +1,9 @@
 package edu.ncsu.csc216.wolf_scheduler.course;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 /**
  * Description of Course
  * @author Nick Board
@@ -237,42 +241,57 @@ public abstract class Activity implements Conflict {
 	 */
 	@Override
 	public void checkConflict(Activity possibleConflictingActivity) throws ConflictException {
-		char[] thisAct = this.getMeetingDays().toCharArray();
-		char[] thatAct = possibleConflictingActivity.getMeetingDays().toCharArray();
 		
-		boolean commonMeetDays = false;
-		for (int i = 0; i < thisAct.length - 1; i++) {
-			char thisChar = thisAct[i];
-			
-					for (int j = 0; j < thatAct.length - 1; j++) {
-						char thatChar = thatAct[j];
-						
-						if (thisChar == thatChar) {
-							commonMeetDays = true;
-						}
-					}				
+		//Creates character arrays of the meetingDays for both activities
+		char[] theseDays = this.getMeetingDays().toCharArray();
+		char[] thoseDays = possibleConflictingActivity.getMeetingDays().toCharArray();
+		
+		//Initialize ArrayLists for the meetingDays for both activities
+		ArrayList<Character> theseDaysList = new ArrayList<Character>();
+		ArrayList<Character> thoseDaysList = new ArrayList<Character>();
+		
+		//Add each character from the character arrays into the ArrayLists
+		for (char c : theseDays) {
+			theseDaysList.add(c);
 		}
 		
-		if (commonMeetDays == true) {
-			if (this.getEndTime() == possibleConflictingActivity.getStartTime()) {
-				throw new ConflictException();
-				
+		for (char c: thoseDays) {
+			thoseDaysList.add(c);
+		}
+		
+		//Determines if the two ArrayLists share any common elements
+		char[] possibleDays = {'M','T','W','H','F','S','U'};
+		char currentDay = ' ';
+		boolean daysInCommon = false;
+		
+		for(int i = 0; i < possibleDays.length; i++) {
+			currentDay = possibleDays[i];
+			
+			if (theseDaysList.contains(currentDay) && thoseDaysList.contains(currentDay)) {
+				daysInCommon = true;
 			}
-			else if (this.getEndTime() > possibleConflictingActivity.getStartTime() && this.getEndTime() < possibleConflictingActivity.getEndTime()) {
-				throw new ConflictException();
-				
+		}
+		
+		if (daysInCommon == true) {
+			//Determine which activity comes first
+			Activity first = null;
+			Activity second = null;
+			
+			if (this.getStartTime() < possibleConflictingActivity.getStartTime()) {
+				first = this;
+				second = possibleConflictingActivity;
 			}
-			else if (this.getStartTime() == possibleConflictingActivity.getStartTime() || this.getEndTime() == possibleConflictingActivity.getEndTime()) {
-				throw new ConflictException();
-
+			else if (this.getStartTime() > possibleConflictingActivity.getStartTime()) {
+				first = possibleConflictingActivity;
+				second = this;
 			}
-			else if (this.getStartTime() < possibleConflictingActivity.getEndTime() && this.getEndTime() > possibleConflictingActivity.getEndTime()) {
+			else if (this.getStartTime() == possibleConflictingActivity.getStartTime()) {
 				throw new ConflictException();
-
 			}
-			else if (this.getStartTime() == possibleConflictingActivity.getEndTime()) {
+			
+			//If the second activity starts before the first one ends, there is a conflict
+			if (second.getStartTime() <= first.getEndTime()) {
 				throw new ConflictException();
-
 			}
 		}
 	}
