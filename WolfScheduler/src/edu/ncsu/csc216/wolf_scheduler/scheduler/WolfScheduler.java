@@ -64,7 +64,7 @@ public class WolfScheduler {
 	 * @param section section of the course to add
 	 * @throws IllegalArgumentException if that course is already in the schedule
 	 * @return false if the course can't be added
-	 * @throws ConflictException 
+	 * @throws IllegalArgumentException
 	 */
 	public boolean addCourse(String name, String section) throws IllegalArgumentException {
 		

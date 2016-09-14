@@ -1,8 +1,6 @@
 package edu.ncsu.csc216.wolf_scheduler.course;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Description of Course
@@ -274,8 +272,8 @@ public abstract class Activity implements Conflict {
 		
 		if (daysInCommon == true) {
 			//Determine which activity comes first
-			Activity first = null;
-			Activity second = null;
+			Activity first = this;
+			Activity second = possibleConflictingActivity;
 			
 			if (this.getStartTime() < possibleConflictingActivity.getStartTime()) {
 				first = this;
