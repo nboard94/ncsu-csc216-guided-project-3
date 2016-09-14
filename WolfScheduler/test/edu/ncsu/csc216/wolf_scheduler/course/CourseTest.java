@@ -693,12 +693,18 @@ public class CourseTest {
 		assertEquals(s2, c2.toString());
 	}
 	
+	/**
+	 * Tests Course.getShortArray()
+	 */
 	@Test
 	public void testShortArray() {
 		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);
 		assertEquals(c.getShortDisplayArray().length, 4);
 	}
 	
+	/**
+	 * Tests Course.getLongArray()
+	 */
 	@Test
 	public void testLongArray() {
 		Course c = new Course(NAME, TITLE, SECTION, CREDITS, INSTRUCTOR_ID, MEETING_DAYS, START_TIME, END_TIME);

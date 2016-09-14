@@ -145,6 +145,9 @@ public class WolfSchedulerTest {
 
 	}
 	
+	/**
+	 * Test the checkConflict functionality in wolfscheduler.addCourse().
+	 */
 	@Test
 	public void testAddCourseConflicting() {
 		WolfScheduler ws = new WolfScheduler(validTestFile);
@@ -187,6 +190,9 @@ public class WolfSchedulerTest {
 		
 	}
 	
+	/**
+	 * Test the checkConflict functionality in wolfscheduler.addEvent().
+	 */
 	@Test
 	public void testAddEventConflicting() {
 		WolfScheduler ws = new WolfScheduler(validTestFile);

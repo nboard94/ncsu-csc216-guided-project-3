@@ -4,9 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**Tests methods used in the abstract class, Activity
+ * @author NBoar
+ *
+ */
 public class ActivityTest {
 
 	//No conflict test conflicts on different days
+	/**
+	 * tests Activity.checkConflict()
+	 */
 	@Test
 	public void testCheckConflict() {
 	    Activity a1 = new Course("CSC216", "Programming Concepts - Java", "001", 4, "sesmith5", "MW", 1330, 1445);

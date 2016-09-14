@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-/**
+/**Tests the custom exception "conflictException".
  * @author NBoar
  *
  */
