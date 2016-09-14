@@ -190,7 +190,7 @@ public class WolfSchedulerTest {
 	}
 	
 	@Test
-	public void testAddEventConflict() throws ConflictException {
+	public void testAddEventConflict() {
 		WolfScheduler ws = new WolfScheduler(validTestFile);
 	
 		try {

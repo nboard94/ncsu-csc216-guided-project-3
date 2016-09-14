@@ -91,7 +91,7 @@ public class WolfScheduler {
 				try {
 					schedule.get(i).checkConflict(courseToAdd);
 				} catch (ConflictException e) {
-					throw new IllegalArgumentException("Schedule conflict.");
+					throw new IllegalArgumentException(e.getMessage());
 				}
 				
 			}
@@ -122,7 +122,7 @@ public class WolfScheduler {
  * @throws ConflictException 
  */
 public boolean addEvent(String eventTitle, String eventMeetingDays, int eventStartTime, int eventEndTime,
-			int eventWeeklyRepeat, String eventDetails) throws IllegalArgumentException, ConflictException {
+			int eventWeeklyRepeat, String eventDetails) throws IllegalArgumentException {
 		
 		Event eventToAdd = new Event(eventTitle, eventMeetingDays, eventStartTime, eventEndTime, eventWeeklyRepeat, eventDetails);
 		
@@ -138,8 +138,8 @@ public boolean addEvent(String eventTitle, String eventMeetingDays, int eventSta
 			}
 			try {
 				schedule.get(i).checkConflict(eventToAdd);
-			} catch (IllegalArgumentException e) {
-				throw new IllegalArgumentException();
+			} catch (ConflictException e) {
+				throw new IllegalArgumentException(e.getMessage());
 			}
 		}
 
