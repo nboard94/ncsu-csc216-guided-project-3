@@ -264,7 +264,7 @@ public abstract class Activity implements Conflict {
 			}
 			else if (this.getStartTime() == possibleConflictingActivity.getStartTime() || this.getEndTime() == possibleConflictingActivity.getEndTime()) {
 				throw new ConflictException();
-				
+
 			}
 			else if (this.getStartTime() < possibleConflictingActivity.getEndTime() && this.getEndTime() > possibleConflictingActivity.getEndTime()) {
 				throw new ConflictException();
@@ -275,7 +275,6 @@ public abstract class Activity implements Conflict {
 
 			}
 		}
-		
 	}
 
 

@@ -13,6 +13,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import edu.ncsu.csc216.wolf_scheduler.course.Activity;
+import edu.ncsu.csc216.wolf_scheduler.course.ConflictException;
 import edu.ncsu.csc216.wolf_scheduler.course.Course;
 
 /**
@@ -141,13 +142,29 @@ public class WolfSchedulerTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals("You are already enrolled in CSC216", e.getMessage());
 		}
+
+	}
+	
+	@Test
+	public void testAddCourseConflict() {
+		WolfScheduler ws = new WolfScheduler(validTestFile);
+		//Adds two courses
+		//Tests if the second conflicts with the first
+		try {
+			ws.addCourse("CSC116", "001");
+			ws.addCourse("CSC226", "001");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("Schedule conflict.", e.getMessage());
+		}
 	}
 	
 	/**
 	 * Test WolfScheduler.addEvent().
+	 * @throws ConflictException 
 	 */
 	@Test
-	public void testAddEvent() {
+	public void testAddEvent() throws ConflictException {
 		WolfScheduler ws = new WolfScheduler(validTestFile);
 		
 		ws.addEvent(EVENT_TITLE, EVENT_MEETING_DAYS, EVENT_START_TIME, EVENT_END_TIME, EVENT_WEEKLY_REPEAT, EVENT_DETAILS);
@@ -169,13 +186,34 @@ public class WolfSchedulerTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals("You have already created an event called Exercise", e.getMessage());
 		}
+		
 	}
 	
+	@Test
+	public void testAddEventConflict() throws ConflictException {
+		WolfScheduler ws = new WolfScheduler(validTestFile);
+	
+		try {
+			ws.addEvent("NOT EXERCISE", EVENT_MEETING_DAYS, EVENT_START_TIME, EVENT_END_TIME, EVENT_WEEKLY_REPEAT, EVENT_DETAILS);
+			ws.addEvent("EXERCISE", EVENT_MEETING_DAYS, EVENT_START_TIME, EVENT_END_TIME, EVENT_WEEKLY_REPEAT, EVENT_DETAILS);
+	
+			System.out.println(ws.schedule.size());
+			System.out.println(ws.schedule.get(0));
+			System.out.println(ws.schedule.get(1));
+	
+			fail();
+		} catch (ConflictException e) {
+			assertEquals("Schedule conflict.", e.getMessage());
+		}
+	}
+
 	/**
 	 * Test WolfScheduler.removeCourse().
+	 * @throws ConflictException 
+	 * @throws IllegalArgumentException 
 	 */
 	@Test
-	public void testRemoveActivity() {
+	public void testRemoveActivity() throws IllegalArgumentException, ConflictException {
 		WolfScheduler ws = new WolfScheduler(validTestFile);
 		
 		//Attempt to remove from empty schedule

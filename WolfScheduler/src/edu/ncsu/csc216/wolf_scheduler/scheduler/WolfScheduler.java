@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import edu.ncsu.csc216.wolf_scheduler.course.Activity;
+import edu.ncsu.csc216.wolf_scheduler.course.ConflictException;
 import edu.ncsu.csc216.wolf_scheduler.course.Course;
 import edu.ncsu.csc216.wolf_scheduler.course.Event;
 import edu.ncsu.csc216.wolf_scheduler.io.ActivityRecordIO;
@@ -63,8 +64,9 @@ public class WolfScheduler {
 	 * @param section section of the course to add
 	 * @throws IllegalArgumentException if that course is already in the schedule
 	 * @return false if the course can't be added
+	 * @throws ConflictException 
 	 */
-	public boolean addCourse(String name, String section) {
+	public boolean addCourse(String name, String section) throws IllegalArgumentException {
 		
 		Activity currentCourse;
 		Course courseToAdd = new Course (name, "title", section, 3, "id", "MWF");
@@ -85,6 +87,11 @@ public class WolfScheduler {
 				currentCourse = schedule.get(i);
 				if (currentCourse.isDuplicate(courseToAdd)) {
 					throw new IllegalArgumentException("You are already enrolled in " + name);
+				}
+				try {
+					schedule.get(i).checkConflict(courseToAdd);
+				} catch (ConflictException e) {
+					throw new IllegalArgumentException("Schedule conflict.");
 				}
 				
 			}
@@ -112,9 +119,10 @@ public class WolfScheduler {
  * @param eventDetails extra details about the event
  * @throws IllegalArgumentException if event is a duplicate
  * @return false if event can't be added
+ * @throws ConflictException 
  */
 public boolean addEvent(String eventTitle, String eventMeetingDays, int eventStartTime, int eventEndTime,
-			int eventWeeklyRepeat, String eventDetails) {
+			int eventWeeklyRepeat, String eventDetails) throws IllegalArgumentException, ConflictException {
 		
 		Event eventToAdd = new Event(eventTitle, eventMeetingDays, eventStartTime, eventEndTime, eventWeeklyRepeat, eventDetails);
 		
@@ -122,21 +130,21 @@ public boolean addEvent(String eventTitle, String eventMeetingDays, int eventSta
 			schedule.add(eventToAdd);
 			return true;
 		}
-		
-		
 
-		for (int i = 0; i < schedule.size(); i++) {
-
-				if (schedule.get(i).isDuplicate(eventToAdd)) {
-					throw new IllegalArgumentException("You have already created an event called " + eventTitle);
-				}
-				else if (!schedule.get(i).isDuplicate(eventToAdd)) {
-					schedule.add(eventToAdd);
-					return true;
-				}
+		for (int i = 0; i < schedule.size(); i++) {			
+			
+			if (schedule.get(i).isDuplicate(eventToAdd)) {
+				throw new IllegalArgumentException("You have already created an event called " + eventTitle);
+			}
+			try {
+				schedule.get(i).checkConflict(eventToAdd);
+			} catch (IllegalArgumentException e) {
+				throw new IllegalArgumentException();
+			}
 		}
-		
-		return false;
+
+		schedule.add(eventToAdd);
+		return true;
 		
 	}
 

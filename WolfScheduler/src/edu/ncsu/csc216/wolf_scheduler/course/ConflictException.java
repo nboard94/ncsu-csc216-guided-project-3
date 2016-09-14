@@ -5,11 +5,11 @@ public class ConflictException extends Exception {
 	/** ID used for serialization. */
 	private static final long serialVersionUID = 1L;
 
-	ConflictException (String s) {
+	public ConflictException (String s) {
 		super(s);
 	}
 	
-	ConflictException() {
+	public ConflictException() {
 		super("Schedule conflict.");
 	}
 }
