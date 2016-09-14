@@ -193,8 +193,8 @@ public class WolfSchedulerTest {
 		WolfScheduler ws = new WolfScheduler(validTestFile);
 
 		try {
-			ws.addEvent("Exercise", "MWF", 1300, 1400, 4, "Strongman");
-			ws.addEvent("Not Exercise", "WF", 1300, 1400, 4, "Strogboy");
+			ws.addEvent("n2", "MWF", 1300, 1400, 4, "n2");
+			ws.addEvent("n3", "WF", 1300, 1400, 4, "n3");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals(e.getMessage(), "The event cannot be added due to a conflict.");

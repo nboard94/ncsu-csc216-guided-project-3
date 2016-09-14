@@ -211,20 +211,9 @@ public boolean addEvent(String eventTitle, String eventMeetingDays, int eventSta
 			return scheduleArray;
 		}
 		
-		Activity currentActivity;
-		for (int i = 0; i < schedule.size(); i++) {
-			currentActivity = schedule.get(i);
-			if (currentActivity instanceof Course) {
-				scheduleArray[i][0] = ((Course) currentActivity).getName();
-				scheduleArray[i][1] = ((Course) currentActivity).getSection();
-				scheduleArray[i][2] = currentActivity.getTitle();
-			}
+		for (int i = 0; i < schedule.size(); i++) {			
+			scheduleArray[i] = schedule.get(i).getShortDisplayArray();
 			
-			else if (currentActivity instanceof Event) {
-				scheduleArray[i][0] = currentActivity.getTitle();
-				scheduleArray[i][1] = currentActivity.getMeetingString();
-				scheduleArray[i][2] = ((Event) currentActivity).getEventDetails();
-			}
 		}
 	
 		return scheduleArray;
