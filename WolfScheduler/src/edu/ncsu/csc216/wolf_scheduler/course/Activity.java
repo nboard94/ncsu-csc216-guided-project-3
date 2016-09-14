@@ -270,7 +270,7 @@ public abstract class Activity implements Conflict {
 			}
 		}
 		
-		if (daysInCommon == true) {
+		if (daysInCommon) {
 			//Determine which activity comes first
 			Activity first = this;
 			Activity second = possibleConflictingActivity;
